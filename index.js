@@ -6,6 +6,8 @@ const seedrouter = require("./routes/seeddata.route");
 const wishlistrouter = require("./routes/wishlist.route");
 const productrouter = require("./routes/product.route")
 const cartrouter = require("./routes/cart.route")
+// const userrouter = require("./routes/user.route");
+// const jwt = require("jsonwebtoken")
 const cors = require("cors");
 
 
@@ -24,6 +26,47 @@ app.use("/api",seedrouter);
 app.use("/api",wishlistrouter);
 app.use("/api",cartrouter);
 app.use("/api/products",productrouter)
+// app.use("/api",userrouter)
+
+// const users = [
+//   {
+//       userName:"himanshu",
+//       password:"rana"
+
+//   },
+//   {
+//       userName:"aditi",
+//       password:"jaiswal"
+//   },
+//   {
+//       userName:"pratham",
+//       password:"sharma"
+
+//   }
+// ]
+
+// function checkCredential(req,res,next)
+// {
+//   const user = req.body;
+//   console.log(req.body)
+//   const userName = users.find(item=>item.userName === user.userName)
+//   if(user.password === userName.password)
+//   {
+//     const token = jwt.sign({userid:12345},"abrakadabra",{expiresIn:"24h"})
+//     req.token = token;
+//     return next()
+//   }
+//   res.status(401).json({success:false,message:"give correct username and password"})
+
+// }
+
+// app.post("/api/login",checkCredential,(req,res)=>
+// {
+//   const user = req.body
+//   res.send({user:user,token:req.token});
+  
+
+// })
 
 // if the route is not found
 app.use((req, res) => {
