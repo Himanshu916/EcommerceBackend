@@ -1,13 +1,20 @@
+require("dotenv").config()
 const mongoose = require('mongoose');
+
 
 module.exports = function initiatedatabase()
 {
 
-    const uri = "mongodb+srv://himanshuRanaDB:aditij@123Hi@himanshurana-cluster.rd9v0.mongodb.net/ECommerce"
+    const uri = process.env.MONGODB_URL
     mongoose.connect(uri,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex:true
         // Timeout after 5s instead of 30s
+      },err=> 
+      {
+        if (err) throw err
+        console.log("Connected to mongoDB")
       })
 
 
