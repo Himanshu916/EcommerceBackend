@@ -1,40 +1,72 @@
 const express = require("express");
 const userrouter = express.Router();
-const jwt = require("jsonwebtoken");
+const userCtrl = require("../controllers/userCtrl")
+const isAuthorized = require("../middlewares/isAuthorized")
+const cookieParser = require("cookie-parser");
+userrouter.use(cookieParser())
 
-const userlogger=function(req,res,next)
-{
-    console.log("user is logged");
-    next()
-}
+userrouter.route("/register")
+.post(userCtrl.register)
 
-const isAuthorized = function(req,res,next)
-{
-    const token = req.headers.authorization;
-    try
-    {
-        const decoded = jwt.verify(token,"abrakadabra")
-        req.user = {userid:decoded.userid}
-        next();
-        
-    }
-    catch (error)
-    {
-        res.status(401).json({success:false,message:"please give the token"})
-    }
-    // if(token === "himanshu")
-    // {
-    //     return next()
-    // }
-        
-    
-    
-}
+userrouter.post("/login",userCtrl.login);
 
-userrouter.route("/user")
-.get(isAuthorized,userlogger,(req,res)=>
-{
-    res.send({name:"Himanshu Rana",age:23,pincode:201002})
-})
+userrouter.get("/refresh_token",userCtrl.refreshtoken)
+
+userrouter.get("/logout",userCtrl.logout)
+
+userrouter.get("/infor",isAuthorized,userCtrl.getUser)
+
+
+
+// userrouter.route("/refresh_token")
+// .post(userCtrl.refreshtoken)
+// .get(userCtrl.refreshtoken)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// userrouter.route("/user")
+// .get(isAuthorized,userlogger,(req,res)=>
+// {
+//     res.send({name:"Himanshu Rana",age:23,pincode:201002})
+// })
+
+
+
 
 module.exports = userrouter;
+
+
+
+

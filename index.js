@@ -1,19 +1,27 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const cookieParser = require("cookie-parser");
+const fileUpload = require("express-fileupload")
 const initiatedatabase = require('./db/initiatedatabase')
 const app = express();
 const seedrouter = require("./routes/seeddata.route");
 const wishlistrouter = require("./routes/wishlist.route");
 const productrouter = require("./routes/product.route")
 const cartrouter = require("./routes/cart.route")
-// const userrouter = require("./routes/user.route");
+const userrouter = require("./routes/user.route");
+const categorierouter = require("./routes/categorie.route")
 // const jwt = require("jsonwebtoken")
 const cors = require("cors");
+
 
 
 initiatedatabase();
 //  just dtarting middlewares
 app.use(bodyParser.json())
+app.use(cookieParser())
+app.use(fileUpload({
+  useTempFiles:true
+}))
 app.use(cors())
 
 // default route
@@ -26,7 +34,8 @@ app.use("/api",seedrouter);
 app.use("/api",wishlistrouter);
 app.use("/api",cartrouter);
 app.use("/api/products",productrouter)
-// app.use("/api",userrouter)
+app.use("/api/user",userrouter)
+app.use("/api",categorierouter)
 
 // const users = [
 //   {
