@@ -10,6 +10,7 @@ const productrouter = require("./routes/product.route")
 const cartrouter = require("./routes/cart.route")
 const userrouter = require("./routes/user.route");
 const categorierouter = require("./routes/categorie.route")
+const uploadrouter = require("./routes/upload.route")
 // const jwt = require("jsonwebtoken")
 const cors = require("cors");
 
@@ -36,6 +37,7 @@ app.use("/api",cartrouter);
 app.use("/api/products",productrouter)
 app.use("/api/user",userrouter)
 app.use("/api",categorierouter)
+app.use("/api",uploadrouter)
 
 // const users = [
 //   {
