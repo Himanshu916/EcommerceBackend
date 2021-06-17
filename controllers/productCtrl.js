@@ -15,18 +15,18 @@ getProducts:async (req,res)=>
 createProduct:async (req,res)=>
 {
     try{
-        const {product_id,title,price,description,content,categorie,sold,checked,images} = req.body;
+        const {product_id,title,price,discount,description,content,categorie,sold,checked,images} = req.body;
      
         const product = await Products.findOne({product_id});
         if(product) return res.status(400).json({message:"product is already exist "})
 
         const newProduct = new Products({
-            product_id,title,price,description,content,categorie,sold,checked,images
+            product_id,title,price,discount,description,content,categorie,sold,checked,images
         })
 
         const x= await newProduct.save()
         console.log(x)
-        res.json({product_id,title,price,description,content,categorie,sold,checked,images})
+        res.json({product_id,title,price,discount,description,content,categorie,sold,checked,images})
 
     }catch(error)
     {
@@ -51,7 +51,7 @@ updateProduct:async (req,res)=>
     try
     {
         const {productId} = req.params;
-        const {title,price,description,content,categorie,sold,checked,images} = req.body;
+        const {title,price,discount,description,content,categorie,sold,checked,images} = req.body;
         await Products.findOneAndUpdate({_id:productId},{title,price,description,content,categorie,sold,checked,images})
         
         res.json({message:"product updated"})
