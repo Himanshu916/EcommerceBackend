@@ -18,17 +18,12 @@ const userSchema = new Schema({
         type:String,
         required:"please enter your password",
     },
-    wishList:[
-        {
-            wishitem:{type:Schema.Types.ObjectId,ref:"Products"}
-        }
-    ],
-    cartItems:[
-        {
-            quantity:Number,
-            cartitem:{type:Schema.Types.ObjectId,ref:"Products"}
-        }
-    ],
+    wishList:{
+        type:Array
+    },
+    cartItems:{
+        type:Array
+    },
     role:{
         type:Number,
         default:0

@@ -14,7 +14,7 @@ const isAuthorized = function(req,res,next)
         if(!token) return res.status(400).json({message:"invalid authentication"})
         jwt.verify(token,process.env.ACCESS_TOKEN_SECRET_KEY,(error,user)=>
         {
-            if(error) return res.stauts(400).json({message:"invalid authentication"})
+            if(error) return res.status(400).json({message:"invalid authentication"})
             req.user = user;
             next();
         })
